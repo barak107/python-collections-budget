@@ -28,9 +28,9 @@ class BudgetList:
     
     def __next__(self):
         try:
-            return next(self.iter_e)
+            return self.iter_e.__next__()
         except StopIteration as stop:
-            return next(self.iter_o)
+            return self.iter_o.__next__()
 
 def main():
     myBudgetList = BudgetList(1200)
@@ -39,6 +39,8 @@ def main():
     for expense in expenses.list:
         myBudgetList.append(expense.amount)
     print('The count of all expenses: '+ str(len(myBudgetList)))
+    for entry in myBudgetList:
+        print(entry)
     fig, ax = plt.subplots()
     labels = ['Expenses', 'Overages', 'Budget']
     values = [myBudgetList.sum_expenses, myBudgetList.sum_overages, myBudgetList.budget]
